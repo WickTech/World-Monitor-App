@@ -1,4 +1,6 @@
-const generateMetrics = () => ({
+const { fetchBestPerformingStock, fetchWorldNews } = require("./liveData");
+
+const generateBaseMetrics = () => ({
   users: 12400,
   sales: 8300,
   revenue: 65000,
@@ -11,5 +13,16 @@ const generateMetrics = () => ({
   regionLabels: ["Americas", "Europe", "Asia", "Africa"],
   deviceLabels: ["Desktop", "Mobile", "Tablet"]
 });
+
+const generateMetrics = async () => {
+  const [bestStock, worldNews] = await Promise.all([fetchBestPerformingStock(), fetchWorldNews()]);
+
+  return {
+    ...generateBaseMetrics(),
+    bestStock,
+    worldNews,
+    updatedAt: new Date().toISOString()
+  };
+};
 
 module.exports = { generateMetrics };

@@ -5,7 +5,7 @@ const { generateMetrics } = require("../services/dataService");
 const router = express.Router();
 
 router.get("/", async (_req, res) => {
-  const data = generateMetrics();
+  const data = await generateMetrics();
   res.json(data);
 });
 

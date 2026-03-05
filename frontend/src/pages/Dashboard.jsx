@@ -4,7 +4,9 @@ import { fetchMetrics } from "../api/api";
 import BarChart from "../components/BarChart";
 import DashboardCards from "../components/DashboardCards";
 import LineChart from "../components/LineChart";
+import MarketHighlights from "../components/MarketHighlights";
 import PieChart from "../components/PieChart";
+import WorldNewsCorner from "../components/WorldNewsCorner";
 
 export default function Dashboard() {
   const [metrics, setMetrics] = useState(null);
@@ -20,7 +22,7 @@ export default function Dashboard() {
           setMetrics(data);
           setError("");
         }
-      } catch (requestError) {
+      } catch (_requestError) {
         if (isMounted) {
           setError("Unable to load metrics. Start backend on port 5000.");
         }
@@ -28,7 +30,7 @@ export default function Dashboard() {
     };
 
     loadData();
-    const poller = setInterval(loadData, 10000);
+    const poller = setInterval(loadData, 300000);
 
     return () => {
       isMounted = false;
@@ -56,7 +58,9 @@ export default function Dashboard() {
           <h3>Device Usage</h3>
           <PieChart labels={metrics.deviceLabels} data={metrics.deviceUsage} />
         </article>
+        <MarketHighlights bestStock={metrics.bestStock} updatedAt={metrics.updatedAt} />
       </section>
+      <WorldNewsCorner newsItems={metrics.worldNews} />
     </main>
   );
 }
