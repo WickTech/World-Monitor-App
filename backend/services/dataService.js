@@ -1,0 +1,15 @@
+const generateMetrics = () => ({
+  users: 12400,
+  sales: 8300,
+  revenue: 65000,
+  activeSessions: 498,
+  apiRequests: 120300,
+  traffic: [30, 45, 28, 80, 99, 43, 50],
+  regionSales: [2200, 3100, 1800, 1200],
+  deviceUsage: [64, 26, 10],
+  labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  regionLabels: ["Americas", "Europe", "Asia", "Africa"],
+  deviceLabels: ["Desktop", "Mobile", "Tablet"]
+});
+
+module.exports = { generateMetrics };
